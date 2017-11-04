@@ -93,9 +93,10 @@ namespace OrientDB.Net.ConnectionProtocols.Binary.Operations
 
         private bool EndOfStream(BinaryReader reader)
         {
-            BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
-            var length = (Int32)typeof(NetworkStream).GetTypeInfo().GetField("_readLen", flags).GetValue(reader.BaseStream);
-            var pos = (Int32)typeof(NetworkStream).GetTypeInfo().GetField("_readPos", flags).GetValue(reader.BaseStream);
+            
+               BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            var length = (Int32)typeof(NetworkStream).GetField("_readLen", flags).GetValue(reader.BaseStream);
+            var pos = (Int32)typeof(NetworkStream).GetField("_readPos", flags).GetValue(reader.BaseStream);
             return length == pos;
         }
 
